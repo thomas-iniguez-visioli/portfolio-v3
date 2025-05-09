@@ -6,7 +6,7 @@ kkoma Blog (OpLog) is a static site generator that fetches blog posts from your 
 
 ## Live Demo
 
-Visit [oplog.isalman.dev](https://oplog.isalman.dev) to see OpLog in action. This is based on my fedirated instance [social.isalman.dev](https://social.isalman.dev)
+Visit [oplog.isalman.dev](https://oplog.isalman.dev) to see OpLog in action. This is based on my federated instance [social.isalman.dev](https://social.isalman.dev)
 
 ## Features
 
