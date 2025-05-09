@@ -1,15 +1,24 @@
 {
   "name": "akkoma-blog",
   "version": "1.0.0",
-  "description": "Static blog site powered by Akkoma Atom feed",
+  "description": "A blog powered by Eleventy and Akkoma",
+  "main": "index.js",
   "scripts": {
     "start": "eleventy --serve",
-    "build": "eleventy"
+    "build": "eleventy",
+    "fetch-posts": "node scripts/fetch-posts.js"
   },
+  "keywords": [
+    "blog",
+    "eleventy",
+    "akkoma",
+    "activitypub"
+  ],
+  "author": "Salman Qureshi",
+  "license": "MIT",
   "dependencies": {
-    "@11ty/eleventy": "^1.0.2",
-    "xml2js": "^0.5.0",
-    "node-fetch": "^3.3.2"
-  },
-  "type": "module"
+    "@11ty/eleventy": "^1.0.0",
+    "luxon": "^2.3.0",
+    "node-fetch": "^2.6.7"
+  }
 }

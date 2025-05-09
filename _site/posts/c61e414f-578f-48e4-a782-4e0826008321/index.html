@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>We’re Severely Underestimating Docker Vulnerabilities — And It Might Burn Us AllDocker changed ho... -  Salman's OpLog</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;700&display=swap">
+  <meta name="description" content="OpLog - Salman's programming thoughts and technical opinions">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="header-content">
+        <h1 class="site-title"><a href="/">Salman's OpLog</a></h1>
+        <nav class="main-nav">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="https://social.isalman.dev/users/hothead" target="_blank">Akkoma</a></li>
+            <li><a href="https://github.com/hotheadhacker" target="_blank">GitHub</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <div class="container main-container">
+    
+<article class="single-post">
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2025-05-07T14:50:42.706Z">May 3, 2025</time>
+    </div>
+    <h1 class="post-title">We’re Severely Underestimating Docker Vulnerabilities — And It Might Burn Us AllDocker changed ho...</h1>
+  </header>
+  
+  <div class="post-content">
+    <p>We’re Severely Underestimating Docker Vulnerabilities — And It Might Burn Us All<p>Docker changed how we build and ship software. It gave developers the power to package everything into portable containers. But somewhere along the way, we’ve become <em>too comfortable</em>, too trusting of images, and too careless with commands like <code>docker build</code> and <code>docker exec</code>.</p><p>Let’s talk about the security mess we’re <em>not</em> discussing enough.</p><hr />The Illusion of Isolation<p>Containers are often mistaken for lightweight VMs. But they’re not. Docker uses the host kernel, and unless configured carefully, a malicious container can access far more than intended.</p><p>Commands like <code>docker exec</code> drop you into a container. Useful, yes — but also risky. Any script or automation using it might interact with host resources or expose sensitive files unintentionally.</p><hr />The Real Risk of <code>docker build</code><p><code>docker build</code> is an overlooked attack vector. It:</p><ul><li>Takes a <code>Dockerfile</code></li><li>Executes each instruction <em>as root</em></li><li>Often pulls base images from public registries</li></ul><p>Now imagine this:</p><p>You clone a random GitHub repo, run <code>docker build .</code>, and boom — you’ve executed arbitrary root-level instructions. No warnings. Just blind trust.</p><hr />Real-World Case: Docker Hub Malware<p>In 2021, over <strong>30 malicious Docker images</strong> were found on Docker Hub. They had been downloaded <strong>millions of times</strong> and were used to:</p><ul><li>Mine crypto  </li><li>Leak secrets  </li><li>Create backdoors  </li></ul><p>These weren’t obscure projects. They had names like <code>alpine-nginx</code> or <code>ubuntu-node</code>, making them easy to mistake for safe options.</p><hr />Dockerfile Hell<p>Many Dockerfiles reference scripts like:</p><pre><code>RUN curl <a href="https://example.com/script.sh">https://example.com/script.sh</a> | bash<br>
+</code></pre><p>Or clone unknown repos. This adds <strong>layers of trust issues</strong>.</p><p>Once a payload hides in one of these layers, it can:</p><ul><li>Hijack your SSH keys  </li><li>Drop persistent malware  </li><li>Leak credentials from ENV variables  </li></ul><hr /><code>docker exec</code> Gone Wrong<p>Running <code>docker exec</code> feels harmless. It’s just for debugging, right?</p><p>But when used poorly — especially in scripts — it can:</p><ul><li>Expose a shell with elevated privileges  </li><li>Access sensitive files  </li><li>Leave behind credentials or temp files  </li></ul><p>If someone gains access to that container, it’s a full gateway into your environment.</p><hr />Root Problem: Blind Trust<p>The issue isn’t Docker itself. It’s how casually we use it:</p><ul><li>Pulling random images  </li><li>Building unverified repos  </li><li>Mounting host volumes  </li><li>Allowing <code>docker.sock</code> access (aka root access to Docker)</li></ul><p>It’s not a Docker flaw. It’s a human flaw.</p><hr />Staying Safe: Practical Tips<p>We <em>can</em> do better. Here’s how:</p>1. Trust base images only from verified sources<ul><li>Use pinned versions (<code>alpine:3.18</code>, not <code>latest</code>)</li><li>Prefer official images</li><li>Scan with tools like <a href="https://github.com/aquasecurity/trivy">Trivy</a></li></ul>2. Audit every Dockerfile you use<ul><li>Watch for suspicious URLs or commands</li><li><p>Avoid <code>curl | bash</code> patterns</p></li></ul>3. Don’t mount Docker socket<ul><li>It gives containers full control</li><li>If required, restrict access or set to read-only</li></ul>4. Avoid running as root<ul><li>Use <code>USER</code> directive</li><li>Drop capabilities with <code>--cap-drop=ALL</code></li></ul>5. Monitor and rescan regularly<ul><li>Docker scan tools help  </li><li>Periodic rebuilds ensure old exploits don’t linger</li></ul><hr />Let’s Be Real<p>We got used to Docker making life easy. But ease brought ignorance. People assume containers are safe just because they’re isolated. But attackers love Docker — especially when misused.</p><p>Next time you run <code>docker build</code> or <code>docker exec</code>, ask yourself:</p><p><em>Do I know what this image is doing?</em></p><p>Because if it breaks out, it’s not <em>just</em> a container anymore.</p><p><strong><a href="https://social.isalman.dev/tag/oplog">#OpLog</a> — Special Drop</strong></p></p>
+
+  </div>
+  
+  <footer class="post-footer">
+    <a href="/" class="back-link">← Back to all posts</a>
+    
+    
+  </footer>
+</article>
+
+<aside class="post-sidebar">
+  <div class="author-card">
+    <div class="author-image">
+      <img src="https://avatars.githubusercontent.com/u/18418340?v=4" alt="Salman Qureshi">
+    </div>
+    <div class="author-info">
+      <h3>Written by Salman Qureshi</h3>
+      <p>Developer, open source enthusiast, and creator of OpLog.</p>
+      <div class="social-links">
+        <a href="https://social.isalman.dev/users/hothead" target="_blank" class="social-link">Akkoma</a>
+        <a href="https://github.com/hotheadhacker" target="_blank" class="social-link">GitHub</a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="open-source-note">
+    <h3>Fork This Blog</h3>
+    <p>OpLog is open source. Create your own federated blog:</p>
+    <a href="https://github.com/hotheadhacker/akkoma-blog" target="_blank" class="github-link">
+      View on GitHub
+    </a>
+  </div>
+</aside>
+
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <p>&copy; Invalid date Salman Qureshi. All opinions are my own.</p>
+        <p>OpLog is powered by <a href="https://www.11ty.dev/">Eleventy</a>, <a href="https://akkoma.social/">Akkoma</a>, and the <a href="https://activitypub.rocks/" target="_blank">ActivityPub</a> protocol.</p>
+        <p><span class="code-comment">// Built with 💻 and ☕</span></p>
+        <p class="open-source-note">This blog is <a href="https://github.com/hotheadhacker/akkoma-blog" target="_blank">open source</a>. Fork it and create your own federated blog.</p>
+      </div>
+    </div>
+  </footer>
+  
+  
+  <script src="/js/media-handler.js"></script>
+  
+</body>
+</html>

@@ -1,16 +1,87 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Akkoma Blog</title>
-</head>
-<body>
-  <h1>Akkoma Blog Posts</h1>
-  <ul>
-    {% for post in posts %}
-      <li>
-        <a href="/posts/{{ post.slug }}/">{{ post.title }}</a> - {{ post.published }}
-      </li>
+---
+layout: layouts/base.njk
+title: Home
+pagination:
+  data: posts
+  size: 5
+  alias: posts
+  reverse: false
+---
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="profile-container">
+      <div class="profile-image">
+        <img src="https://avatars.githubusercontent.com/u/18418340?v=4" alt="Salman Qureshi">
+      </div>
+    </div>
+    <h1 class="site-headline">salmansOpLog</h1>
+    <p class="site-description">return myUnfilteredOpinions.filter(thought => thought.isWorthSharing);</p>
+    <div class="hero-badge">
+      <span class="activitypub-badge">@import ActivityPub</span>
+    </div>
+  </div>
+</section>
+
+
+<div class="content-wrapper">
+  <main class="posts-container">
+    {% for post in pagination.items %}
+      <article class="post-card">
+        <div class="post-card-content">
+          <div class="post-meta">
+            <time datetime="{{ post.date }}">{{ post.date | dateToFormat("MMMM d, yyyy") }}</time>
+          </div>
+          <h2 class="post-title"><a href="{{ post.url }}">{{ post.title }}</a></h2>
+          <div class="post-excerpt">
+            {{ post.excerpt | safe }}
+          </div>
+          <a href="{{ post.url }}" class="read-more">readMore() <span class="arrow">→</span></a>
+        </div>
+      </article>
     {% endfor %}
-  </ul>
-</body>
-</html>
+    
+    {% include "components/pagination.njk" %}
+  </main>
+
+  <aside class="sidebar">
+    <div class="about-card">
+      <h3>whoami</h3>
+      <p>I'm Salman, a developer who spends too much time debugging and not enough time sleeping. These are my unfiltered thoughts on code, tech, and the digital world.</p>
+      <div class="terminal-box">
+        <span class="command-line">git config --global user.name</span>
+        <span class="command-output">Salman Qureshi</span>
+       </div>
+    </div>
+
+    <div class="open-source-card">
+      <h3>Fork This Blog</h3>
+      <p>OpLog is open source and developed by Salman Qureshi. You can clone it and create your own blog from your federated instance (Mastodon, Pleroma, or Akkoma).</p>
+      <div class="terminal-box">
+        <span class="command-line">git clone https://github.com/hotheadhacker/akkoma-blog.git</span>
+        <span class="command-line">cd akkoma-blog</span>
+        <span class="command-line">npm install</span>
+        <span class="command-line">npm run start</span>
+      </div>
+      <a href="https://github.com/hotheadhacker/akkoma-blog" target="_blank" class="github-link">
+        View on GitHub
+      </a>
+    </div>
+    
+    <div class="activitypub-card">
+      <h3>Federated Content</h3>
+      <p>OpLog is powered by the ActivityPub protocol, the same technology behind the Fediverse. Posts are fetched directly from my Akkoma instance.</p>
+      <a href="https://activitypub.rocks/" target="_blank" class="activitypub-link">Learn about ActivityPub</a>
+    </div>
+    
+    <div class="topics-card">
+      <h3>Topics</h3>
+      <ul class="topics-list">
+        <li>Technology</li>
+        <li>Programming</li>
+        <li>Open Source</li>
+        <li>Digital Privacy</li>
+        <li>Web Development</li>
+      </ul>
+    </div>
+    </aside>

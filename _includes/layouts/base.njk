@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if title %}{{ title }} - {% endif %} Salman's OpLog</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;700&display=swap">
+  <meta name="description" content="{% if description %}{{ description }}{% else %}OpLog - Salman's programming thoughts and technical opinions{% endif %}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="header-content">
+        <h1 class="site-title"><a href="/">Salman's OpLog</a></h1>
+        <nav class="main-nav">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="https://social.isalman.dev/users/hothead" target="_blank">Akkoma</a></li>
+            <li><a href="https://github.com/hotheadhacker" target="_blank">GitHub</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <div class="container main-container">
+    {{ content | safe }}
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <p>&copy; {{ "now" | dateToFormat("yyyy") }} Salman Qureshi. All opinions are my own.</p>
+        <p>OpLog is powered by <a href="https://www.11ty.dev/">Eleventy</a>, <a href="https://akkoma.social/">Akkoma</a>, and the <a href="https://activitypub.rocks/" target="_blank">ActivityPub</a> protocol.</p>
+        <p><span class="code-comment">// Built with 💻 and ☕</span></p>
+        <p class="open-source-note">This blog is <a href="https://github.com/hotheadhacker/akkoma-blog" target="_blank">open source</a>. Fork it and create your own federated blog.</p>
+      </div>
+    </div>
+  </footer>
+  
+  {% if page.url != "/" %}
+  <script src="/js/media-handler.js"></script>
+  {% endif %}
+</body>
+</html>

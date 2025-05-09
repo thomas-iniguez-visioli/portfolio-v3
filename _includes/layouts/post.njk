@@ -1,0 +1,50 @@
+---
+layout: layouts/base.njk
+---
+
+<article class="single-post">
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="{{ date }}">{{ date | dateToFormat("MMMM d, yyyy") }}</time>
+    </div>
+    <h1 class="post-title">{{ title }}</h1>
+  </header>
+  
+  <div class="post-content">
+    {{ content | safe }}
+  </div>
+  
+  <footer class="post-footer">
+    <a href="/" class="back-link">← Back to all posts</a>
+    
+    {% if source_url %}
+    <div class="source-note">
+      <p>This post was originally published on my Akkoma instance. <a href="{{ source_url }}" class="source-link" target="_blank">View original post</a></p>
+    </div>
+    {% endif %}
+  </footer>
+</article>
+
+<aside class="post-sidebar">
+  <div class="author-card">
+    <div class="author-image">
+      <img src="https://avatars.githubusercontent.com/u/18418340?v=4" alt="Salman Qureshi">
+    </div>
+    <div class="author-info">
+      <h3>Written by Salman Qureshi</h3>
+      <p>Developer, open source enthusiast, and creator of OpLog.</p>
+      <div class="social-links">
+        <a href="https://social.isalman.dev/users/hothead" target="_blank" class="social-link">Akkoma</a>
+        <a href="https://github.com/hotheadhacker" target="_blank" class="social-link">GitHub</a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="open-source-note">
+    <h3>Fork This Blog</h3>
+    <p>OpLog is open source. Create your own federated blog:</p>
+    <a href="https://github.com/hotheadhacker/akkoma-blog" target="_blank" class="github-link">
+      View on GitHub
+    </a>
+  </div>
+</aside>
