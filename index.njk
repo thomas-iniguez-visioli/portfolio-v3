@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Akkoma Blog</title>
+</head>
+<body>
+  <h1>Akkoma Blog Posts</h1>
+  <ul>
+    {% for post in posts %}
+      <li>
+        <a href="/posts/{{ post.slug }}/">{{ post.title }}</a> - {{ post.published }}
+      </li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
