@@ -4,9 +4,9 @@
   "description": "A blog powered by Eleventy and Akkoma",
   "main": "index.js",
   "scripts": {
-    "start": "eleventy --serve",
-    "build": "eleventy",
-    "fetch-posts": "node scripts/fetch-posts.js"
+  "start": "eleventy --serve",
+  "build": "eleventy",
+  "fetch-posts": "node utils/fetch-posts.js"
   },
   "keywords": [
     "blog",

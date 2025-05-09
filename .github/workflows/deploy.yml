@@ -27,13 +27,10 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: |
-          npm install
-          # Only run npm ci after package-lock.json is updated
-          # npm ci
+        run: npm install
 
       - name: Fetch posts from Akkoma
-        run: npm run fetch-posts
+        run: node utils/fetch-posts.js
 
       - name: Build site
         run: npm run build
