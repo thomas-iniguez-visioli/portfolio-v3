@@ -1,5 +1,5 @@
 export const data = async () => {
-  const posts = await import("../_data/posts.js").then((mod) => mod.default());
+  const posts = await import("../_data/posts.mjs").then((mod) => mod.default());
 
   return {
     pagination: {
