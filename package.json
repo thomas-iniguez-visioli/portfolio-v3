@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Static blog site powered by Akkoma Atom feed",
   "scripts": {
-    "start": "eleventy --serve",
-    "build": "eleventy"
+    "start": "npx eleventy --serve",
+    "build": "npx eleventy"
   },
   "dependencies": {
     "eleventy": "^1.0.2",
