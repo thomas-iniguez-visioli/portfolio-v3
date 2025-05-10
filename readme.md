@@ -1,6 +1,6 @@
 # Akkoma Blog - Federated Blog from Akkoma
 
-kkoma Blog (OpLog) is a static site generator that fetches blog posts from your Akkoma/Pleroma/Mastodon feed and renders them using Eleventy (11ty). It creates a beautiful, fast, and SEO-friendly blog from your ActivityPub content.
+Akkoma Blog (OpLog) is a static site generator that fetches blog posts from your Akkoma/Pleroma/Mastodon feed and renders them using Eleventy (11ty). It creates a beautiful, fast, and SEO-friendly blog from your ActivityPub content.
 
 ![OpLog Screenshot](https://raw.githubusercontent.com/hotheadhacker/akkoma-blog/main/screenshots/1.png)
 
