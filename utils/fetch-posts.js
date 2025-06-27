@@ -3,8 +3,8 @@ const fs = require('fs');
 const path = require('path');
 
 // Hardcoded configuration - no tokens needed for public posts
-const AKKOMA_INSTANCE = 'mastodon.social';
-const AKKOMA_USER = '@spartan_arbinger@mastodon.social';
+const AKKOMA_INSTANCE = 'www.threads.com';
+const AKKOMA_USER = 'arbinger.iv';
 const POST_LIMIT = 100; // Number of posts to fetch
 
 // Ensure the posts directory exists
