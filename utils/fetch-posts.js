@@ -3,8 +3,8 @@ const fs = require('fs');
 const path = require('path');
 
 // Hardcoded configuration - no tokens needed for public posts
-const AKKOMA_INSTANCE = 'social.isalman.dev';
-const AKKOMA_USER = 'hothead';
+const AKKOMA_INSTANCE = 'mastodon.social';
+const AKKOMA_USER = '@spartan_arbinger@mastodon.social';
 const POST_LIMIT = 100; // Number of posts to fetch
 
 // Ensure the posts directory exists
@@ -23,6 +23,7 @@ async function fetchPosts() {
     const response = await fetch(url);
     
     if (!response.ok) {
+      console.log(await response.text())
       throw new Error(`Failed to fetch posts: ${response.statusText}`);
     }
     
